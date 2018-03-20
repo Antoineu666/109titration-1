@@ -1,0 +1,80 @@
+#! /usr/bin/env python3
+
+import sys
+from point import Point
+from utilitaries import *
+
+def compute_ecart(first, second):
+	if (first.y > 0. and second.y < 0.) or (second.y > 0. and first.y < 0.):
+		ecart = abs(first.y) + abs(second.y)
+	elif first.y > second.y:
+		ecart = first.y - second.y
+	else:
+		ecart = second.y - first.y
+	ecart = ecart / abs((second.x - first.x) * 10)
+	if first.y > second.y:
+		ecart = ecart * -1
+	return (ecart)
+
+def second_derivative_estimated(list, mem):
+	equival = Point(999, 999)
+	try:
+		first = list[mem - 1]
+	except:
+		first = list[mem]
+	try:
+		second = list[mem + 1]
+	except:
+		second = list[mem]
+	ecart = compute_ecart(first, list[mem])
+	x = first.x
+	y = first.y
+	print("\nSecond derivative estimated:")
+	while round(x, 9) < list[mem].x:
+		try:
+			assert(x == int(x))
+			print("volume:	%i ml" % int(x), "-> %.2f" % y)
+		except:
+			print("volume:	%.1f ml" % x, "-> %.2f" % y)
+		if abs(y) < equival.y:
+			equival.x = x
+			equival.y = y
+		x = x + 0.1
+		y = y + ecart
+	ecart = compute_ecart(list[mem], second)
+	x = list[mem].x
+	y = list[mem].y
+	while round(x, 9) <= second.x:
+		try:
+			assert(x == int(x))
+			print("volume:	%i ml" % int(x), "-> %.2f" % y)
+		except:
+			print("volume:	%.1f ml" % x, "-> %.2f" % y)
+		if abs(y) < equival.y:
+			equival.x = x
+			equival.y = y
+		x = x + 0.1
+		y = y + ecart
+	return (equival)
+
+def titration():
+	list = create_list_point(sys.argv[1])
+	print("Derivative:")
+	list = derivative(list)
+	mem = find_equivalent_point(list)
+	try:
+		assert(int(list[mem].x) == list[mem].x)
+		print("\nEquivalent point at %i ml" % list[mem].x)
+	except:
+		print("\nEquivalent point at %.1f ml" % list[mem].x)
+	print("\nSecond derivative:")
+	list = derivative(list)
+	mem = second_derivative_estimated(list, mem - 1)
+	print("\nEquivalent point at %.1f ml" % mem.x)
+
+if __name__ == "__main__":
+	if len(sys.argv) != 2:
+		print("Miss file")
+		sys.exit(84)
+	titration()
+	sys.exit(0)
