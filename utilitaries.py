@@ -35,9 +35,9 @@ def derivative(list):
 	while i != len(list) - 1:
 		try:
 			assert(list[i].x == int(list[i].x))
-			print("volume:	%i ml" % int(list[i].x), "-> %.2f" % calcul(list, i))
+			print("volume: %i ml" % int(list[i].x), "-> %.2f" % calcul(list, i))
 		except:
-			print("volume:	%.1f ml" % list[i].x, "-> %.2f" % calcul(list, i))
+			print("volume: %.1f ml" % list[i].x, "-> %.2f" % calcul(list, i))
 		new_list[i - 1] = Point(list[i].x, calcul(list, i))
 		i = i + 1
 	return (new_list)

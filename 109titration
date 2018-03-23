@@ -33,9 +33,9 @@ def second_derivative_estimated(list, mem):
 	while round(x, 9) < list[mem].x:
 		try:
 			assert(x == int(x))
-			print("volume:	%i ml" % int(x), "-> %.2f" % y)
+			print("volume: %i ml" % int(x), "-> %.2f" % y)
 		except:
-			print("volume:	%.1f ml" % x, "-> %.2f" % y)
+			print("volume: %.1f ml" % x, "-> %.2f" % y)
 		if abs(y) < equival.y:
 			equival.x = x
 			equival.y = y
@@ -47,9 +47,9 @@ def second_derivative_estimated(list, mem):
 	while round(x, 9) <= second.x:
 		try:
 			assert(x == int(x))
-			print("volume:	%i ml" % int(x), "-> %.2f" % y)
+			print("volume: %i ml" % int(x), "-> %.2f" % y)
 		except:
-			print("volume:	%.1f ml" % x, "-> %.2f" % y)
+			print("volume: %.1f ml" % x, "-> %.2f" % y)
 		if abs(y) < equival.y:
 			equival.x = x
 			equival.y = y
