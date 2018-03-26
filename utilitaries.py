@@ -1,4 +1,5 @@
 from point import Point
+import sys
 
 def create_list_point(path):
 	try:
@@ -19,6 +20,8 @@ def create_list_point(path):
 		list[i] = Point(s[0], s[1])
 		i = i + 1
 	list = sorted(list, key=lambda Point: Point.x)
+	if len(list) < 7:
+		sys.exit(84);
 	return (list)
 
 def calcul(list, i):
