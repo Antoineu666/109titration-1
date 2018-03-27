@@ -17,19 +17,19 @@ def compute_ecart(first, second):
 	return (ecart)
 
 def second_derivative_estimated(list, mem):
+	print("\nSecond derivative estimated:")
 	equival = Point(999, 999)
 	try:
 		first = list[mem - 1]
 	except:
-		first = list[mem]
+		return (Point(0, 0))
 	try:
 		second = list[mem + 1]
 	except:
-		second = list[mem]
+		return (Point(0, 0))
 	ecart = compute_ecart(first, list[mem])
 	x = first.x
 	y = first.y
-	print("\nSecond derivative estimated:")
 	while round(x, 9) < list[mem].x:
 		try:
 			assert(x == int(x))
@@ -70,8 +70,12 @@ def titration():
 	print("\nSecond derivative:")
 	list = derivative(list)
 	mem = second_derivative_estimated(list, mem - 1)
-	print("\nEquivalent point at %.1f ml" % mem.x)
-
+	try:
+		assert(mem.x == int(mem.x))
+	except:
+		print("\nEquivalent point at %.1f ml" % mem.x)
+		return;
+	print("\nEquivalent point at %i ml" % mem.x)
 if __name__ == "__main__":
 	if len(sys.argv) != 2:
 		print("Miss file")
