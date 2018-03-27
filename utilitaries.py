@@ -14,6 +14,7 @@ def create_list_point(path):
 			assert(len(s) == 2)
 			float(s[0])
 			float(s[1])
+			assert(float(s[0]) > 0)
 		except:
 			print("Bad point")
 			sys.exit(84)
