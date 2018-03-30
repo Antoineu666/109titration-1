@@ -21,7 +21,7 @@ def create_list_point(path):
 		list[i] = Point(s[0], s[1])
 		i = i + 1
 	list = sorted(list, key=lambda Point: Point.x)
-	if len(list) < 5:
+	if len(list) <= 0:
 		sys.exit(84);
 	return (list)
 
